@@ -1,13 +1,9 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 
 let Article = require('../models/article');
 
-router.get('/:id', function(req, res) {
-    Article.findById(req.params.id, function(error, article) {
-        res.json({status: true, data: article});
-    });
-});
+
 
 router.get('/edit/:id', function(req, res) {
     Article.findById(req.params.id, function(error, article) {
@@ -72,6 +68,12 @@ router.post('/update/:id', function(req, res) {
 //         }
 //     });
 // });
+
+router.get('/:id', function(req, res) {
+    Article.findById(req.params.id, function(error, article) {
+        res.json({status: true, data: article});
+    });
+});
 
 router.delete('/:id', function(req, res) {
     Article.findByIdAndDelete({_id: req.params.id}, function(error) {
